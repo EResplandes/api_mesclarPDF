@@ -30,6 +30,39 @@ async function mesclar(arquivoImposto, arquivoControle) {
   }
 }
 
+async function assinar(arquivoPedido, req) {
+  try {
+    const pdfBytes = await fs.readFile(arquivoPedido.path);
+    const pdfDoc = await PDFDocument.load(pdfBytes);
+    const { assinante, cargo } = req.body;
+
+    // Obter a primeira página do PDF
+    const page = pdfDoc.getPage(0);
+
+    if (cargo == "Gerente") {
+      // Adicionar texto na página
+      page.drawText(assinante, {
+        x: 38,
+        y: 120,
+        size: 8,
+      });
+    } else if (cargo == "Diretor") {
+      // Adicionar texto na página
+      page.drawText(assinante, {
+        x: 175,
+        y: 120,
+        size: 8,
+      });
+    }
+
+    const pdfBytesEditado = await pdfDoc.save();
+    return pdfBytesEditado;
+  } catch (erro) {
+    throw new Error("Problemas ao assinar PDF: " + erro.message);
+  }
+}
+
 module.exports = {
   mesclar,
+  assinar,
 };

@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
+    "start": "nodemon app.js",
     "test": "jest"
   },
   "repository": {
@@ -26,7 +26,8 @@
     "pdf-lib": "^1.17.1"
   },
   "devDependencies": {
-    "jest": "^27.4.5"
+    "jest": "^27.4.5",
+    "nodemon": "^3.1.4"
   },
   "jest": {
     "testEnvironment": "node",
