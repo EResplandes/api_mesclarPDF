@@ -15,8 +15,6 @@ app.get("/", (req, res) => {
   res.json({ message: "ok" });
 });
 
-app.use("/programming-languages", programmingLanguagesRouter);
-
 app.use("/pdf", pdfRouter);
 
 app.use((err, req, res, next) => {
